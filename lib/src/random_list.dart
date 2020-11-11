@@ -1,5 +1,6 @@
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_naming_app/src/savedList.dart';
 
 class RandomList extends StatefulWidget {
   @override
@@ -15,6 +16,14 @@ class _RandomListState extends State<RandomList> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Naming App'),
+        actions: [
+          IconButton(
+              icon: Icon(Icons.list),
+              onPressed: () {
+                Navigator
+                    .push(context, MaterialPageRoute(builder: (context) => SavedList(saved : _saved)));
+              }),
+        ],
       ),
       body: _buildList(),
     );
@@ -48,12 +57,11 @@ class _RandomListState extends State<RandomList> {
       ),
       onTap: () {
         setState(() {
-          if(alreadySaved) {
+          if (alreadySaved) {
             _saved.remove(pair); // true
           } else {
             _saved.add(pair); // false
           }
-
         });
         print(_saved.toString()); // 확인용
       },
